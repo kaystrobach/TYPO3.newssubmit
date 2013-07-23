@@ -1,0 +1,39 @@
+plugin.tx_newssubmit {
+	view {
+		templateRootPath = {$plugin.tx_newssubmit.view.templateRootPath}
+		partialRootPath = {$plugin.tx_newssubmit.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_newssubmit.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_newssubmit.persistence.storagePid}
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1
+	}
+}
+
+plugin.tx_newssubmit._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-newssubmit table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-newssubmit table th {
+		font-weight:bold;
+	}
+
+	.tx-newssubmit table td {
+		vertical-align:top;
+	}
+)

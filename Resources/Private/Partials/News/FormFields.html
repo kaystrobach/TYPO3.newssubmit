@@ -1,0 +1,72 @@
+<style>
+	label {
+		display: block;
+		width: 150px;
+		clear: both;
+		float: left;
+		margin-top: 10px;
+
+	}
+	input, textarea {
+		float: left;
+		margin-top: 10px;
+		width: 400px;
+	}
+</style>
+<fieldset>
+	<legend>Nachricht</legend>
+
+	<label for="news_title">
+		<f:translate key="tx_newssubmit_domain_model_news.title" />
+	</label>
+	<f:form.textfield property="title" id="news_title"/>
+
+
+	<label for="news_bodytext">
+		<f:translate key="tx_newssubmit_domain_model_news.bodytext" />
+	</label>
+	<f:form.textarea property="bodytext" id="news_bodytext" rows="10" cols="20" />
+
+</fieldset>
+
+<fieldset>
+	<legend>Metadaten</legend>
+
+	<label for="news_author">
+		<f:translate key="tx_newssubmit_domain_model_news.author" />
+	</label>
+	<f:form.textfield property="author" id="news_author" />
+
+	<label for="news_authorEmail">
+		<f:translate key="tx_newssubmit_domain_model_news.authorEmail" />
+	</label>
+	<f:form.textfield property="authorEmail" id="news_authorEmail"/>
+
+	<label for="news_keywords">
+		<f:translate key="tx_newssubmit_domain_model_news.keywords" />
+	</label>
+	<f:form.textfield property="keywords" id="news_keywords"/>
+</fieldset>
+
+<fieldset>
+	<legend>Verweise</legend>
+
+	<label for="news_link">
+		<f:translate key="tx_newssubmit_domain_model_news.link" />
+	</label>
+	<f:form.textfield name="link" id="news_link"/>
+
+	<label for="news_image">
+		<f:translate key="tx_newssubmit_domain_model_news.image" />
+	</label>
+	<f:form.upload name="image" id="news_image"/>
+
+	<label for="news_attachment">
+		<f:translate key="tx_newssubmit_domain_model_news.attachment" />
+	</label>
+	<f:form.upload name="attachment" id="news_attachment"/>
+</fieldset>
+
+
+
+

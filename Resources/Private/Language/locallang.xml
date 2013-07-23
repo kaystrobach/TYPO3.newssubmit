@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the News Submit extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_newssubmit_domain_model_news">News</label>
+			<label index="1245107351">Value does not match the validation rules.</label>
+			<label index="1221560718">The given subject was empty</label>
+			<label index="1221560910">Value is NULL.</label>
+
+			<label index="tx_newssubmit_domain_model_news.title">Title</label>
+			<label index="tx_newssubmit_domain_model_news.bodytext">Text</label>
+			<label index="tx_newssubmit_domain_model_news.author">Author</label>
+			<label index="tx_newssubmit_domain_model_news.authorEmail">E-Mail</label>
+			<label index="tx_newssubmit_domain_model_news.keywords">Keywords</label>
+			<label index="tx_newssubmit_domain_model_news.image">Image</label>
+
+			<label index="tx_newssubmit_domain_model_news.link">Link</label>
+			<label index="tx_newssubmit_domain_model_news.image">Image</label>
+			<label index="tx_newssubmit_domain_model_news.attachment">Attachment</label>
+
+			<label index="tx_newssubmit_domain_model_news.createNew">Create News</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_newssubmit_domain_model_news">Nachricht</label>
+			<label index="1245107351">Wert erfüllt nicht die Vorgaben.</label>
+			<label index="1221560718">Dieses Feld muss einen Wert enthalten!</label>
+			<label index="1221560718">Dieses Feld muss einen Wert enthalten!</label>
+			<label index="1221560910">Das Feld ist leer</label>
+
+			<label index="tx_newssubmit_domain_model_news.title">Titel</label>
+			<label index="tx_newssubmit_domain_model_news.bodytext">Text</label>
+			<label index="tx_newssubmit_domain_model_news.author">Autor</label>
+			<label index="tx_newssubmit_domain_model_news.authorEmail">E-Mailadresse</label>
+			<label index="tx_newssubmit_domain_model_news.keywords">Schlüsselworte</label>
+			<label index="tx_newssubmit_domain_model_news.image">Bild</label>
+
+			<label index="tx_newssubmit_domain_model_news.link">Link</label>
+			<label index="tx_newssubmit_domain_model_news.image">Bild</label>
+			<label index="tx_newssubmit_domain_model_news.attachment">Anhang</label>
+
+			<label index="tx_newssubmit_domain_model_news.createNew">Nachricht anlegen</label>
+		</languageKey>
+	</data>
+</T3locallang>
