@@ -115,20 +115,13 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 			$from    = t3lib_utility_Mail::getSystemFrom();
 			$message->setFrom($from)
 				->setTo(array($this->settings['recipientMail'] => 'News Manager'))
-				->setSubject($newNews->getTitle())
+				->setSubject('[New News] ' . $newNews->getTitle())
 				->setBody('<h1>New News</h1>' . $newNews->getBodytext(), 'text/html')
 				->send();
 		}
 
 		// go to thank you action
-		$this->redirect(
-			'thankyou',
-			NULL,
-			NULL,
-			array(
-				'news' => $newNews
-			)
-		);
+		$this->redirect('thankyou');
 	}
 
 	/**
