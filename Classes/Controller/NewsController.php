@@ -102,9 +102,33 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 			$newNews->addRelatedFile($attachmentObject);
 		}
 
+		// save news
 		$this->newsRepository->add($newNews);
 		$this->flashMessageContainer->add('Ihre News wurde erstellt.');
-		$this->redirect('thankyou');
+
+		// send mail
+		/**
+		 * @var $message t3lib_mail_Message
+		 */
+		if($this->settings['recipientMail'] !== '') {
+			$message = t3lib_div::makeInstance('t3lib_mail_Message');
+			$from    = t3lib_utility_Mail::getSystemFrom();
+			$message->setFrom($from)
+				->setTo(array($this->settings['recipientMail'] => 'News Manager'))
+				->setSubject($newNews->getTitle())
+				->setBody('<h1>New News</h1>' . $newNews->getBodytext(), 'text/html')
+				->send();
+		}
+
+		// go to thank you action
+		$this->redirect(
+			'thankyou',
+			NULL,
+			NULL,
+			array(
+				'news' => $newNews
+			)
+		);
 	}
 
 	/**
@@ -120,9 +144,10 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * action list
 	 *
+	 * @param Tx_Newssubmit_Domain_Model_News $news
 	 * @return void
 	 */
-	public function thankyouAction() {
+	public function thankyouAction(Tx_Newssubmit_Domain_Model_News $news = NULL) {
 
 	}
 
