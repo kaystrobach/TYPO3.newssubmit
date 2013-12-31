@@ -42,10 +42,12 @@
 	</label>
 	<f:form.textfield property="authorEmail" id="news_authorEmail"/>
 
-	<label for="news_keywords">
-		<f:translate key="tx_newssubmit_domain_model_news.keywords" />
-	</label>
-	<f:form.textfield property="keywords" id="news_keywords"/>
+	<f:if condition="{settings.keywords.enabled}">
+		<label for="news_keywords">
+			<f:translate key="tx_newssubmit_domain_model_news.keywords" />
+		</label>
+		<f:form.textfield property="keywords" id="news_keywords"/>
+	</f:if>
 
 	<f:if condition="{0:settings.categories.enabled}=={0:'single'}">
 		<f:then>
@@ -68,20 +70,26 @@
 <fieldset>
 	<legend>Verweise</legend>
 
-	<label for="news_link">
-		<f:translate key="tx_newssubmit_domain_model_news.link" />
-	</label>
-	<f:form.textfield name="link" id="news_link"/>
+	<f:if condition="{settings.link.enabled}">
+		<label for="news_link">
+			<f:translate key="tx_newssubmit_domain_model_news.link" />
+		</label>
+		<f:form.textfield name="link" id="news_link"/>
+	</f:if>
 
-	<label for="news_image">
-		<f:translate key="tx_newssubmit_domain_model_news.image" />
-	</label>
-	<f:form.upload name="image" id="news_image"/>
+	<f:if condition="{settings.image.enabled}">
+		<label for="news_image">
+			<f:translate key="tx_newssubmit_domain_model_news.image" />
+		</label>
+		<f:form.upload name="image" id="news_image"/>
+	</f:if>
 
-	<label for="news_attachment">
-		<f:translate key="tx_newssubmit_domain_model_news.attachment" />
-	</label>
-	<f:form.upload name="attachment" id="news_attachment"/>
+	<f:if condition="{settings.keywords.attachment}">
+		<label for="news_attachment">
+			<f:translate key="tx_newssubmit_domain_model_news.attachment" />
+		</label>
+		<f:form.upload name="attachment" id="news_attachment"/>
+	</f:if>
 </fieldset>
 
 

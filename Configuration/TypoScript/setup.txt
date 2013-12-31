@@ -10,6 +10,10 @@ plugin.tx_newssubmit {
 	settings {
 		# enable categories posible values; empty = disabled, 1 = mulitple selection, single = single selection
 		categories.enabled = single
+		keywords.enabled = 1
+		link.enabled = 1
+		image.enabled = 1
+		attachment.enabled = 1
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.

@@ -64,7 +64,7 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 * @param string $link
 	 * @return void
 	 */
-	public function createAction(Tx_Newssubmit_Domain_Model_News $newNews, $link) {
+	public function createAction(Tx_Newssubmit_Domain_Model_News $newNews, $link = '') {
 		$newNews->setDatetime(new DateTime());
 		$newNews->setHidden(1);
 
