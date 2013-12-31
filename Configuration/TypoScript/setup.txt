@@ -22,26 +22,24 @@ plugin.tx_newssubmit {
 }
 
 plugin.tx_newssubmit._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
+	.tx-newssubmit label {
+		display: block;
+		width: 150px;
+		clear: both;
+		float: left;
+		margin-top: 10px;
+	}
+	.tx-newssubmit input,
+	.tx-newssubmit textarea,
+	.tx-newssubmit select {
+		float: left;
+		margin-top: 10px;
+		width: 400px;
+	}
+	.tx-newssubmit textarea.f3-form-error,
+	.tx-newssubmit input.f3-form-error,
+	.tx-newssubmit select.f3-form-error {
 		background-color:#FF9F9F;
 		border: 1px #FF0000 solid;
-	}
-
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-newssubmit table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-newssubmit table th {
-		font-weight:bold;
-	}
-
-	.tx-newssubmit table td {
-		vertical-align:top;
 	}
 )
