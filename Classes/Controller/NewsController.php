@@ -45,7 +45,6 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 */
 	protected $categoryRepository;
 
-
 	/**
 	 * Disable default Error FlashMessage
 	 *
@@ -123,10 +122,8 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 		$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('news.created', $this->controllerContext->getRequest()->getControllerExtensionName()));
 
 		// send mail
-		/**
-		 * @var $message t3lib_mail_Message
-		 */
 		if($this->settings['recipientMail']) {
+			/** @var $message t3lib_mail_Message */
 			$message = t3lib_div::makeInstance('t3lib_mail_Message');
 			$from    = t3lib_utility_Mail::getSystemFrom();
 			$message->setFrom($from)

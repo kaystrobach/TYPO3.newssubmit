@@ -15,10 +15,6 @@ plugin.tx_newssubmit {
 		image.enabled =
 		attachment.enabled =
 	}
-	features {
-		# uncomment the following line to enable the new Property Mapper.
-		# rewrittenPropertyMapper = 1
-	}
 }
 
 plugin.tx_newssubmit._CSS_DEFAULT_STYLE (
