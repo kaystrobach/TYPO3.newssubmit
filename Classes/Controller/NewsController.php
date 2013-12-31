@@ -110,7 +110,7 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 
 		// save news
 		$this->newsRepository->add($newNews);
-		$this->flashMessageContainer->add('Ihre News wurde erstellt.');
+		$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('news.created', $this->controllerContext->getRequest()->getControllerExtensionName()));
 
 		// send mail
 		/**

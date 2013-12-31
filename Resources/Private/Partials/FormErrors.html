@@ -1,11 +1,11 @@
 <f:form.errors>
 	<div class="error">
-		Es gab einen Fehler beim Speichern Ihrer Eingabe
+		<f:translate key="formerror"/>
 		<f:if condition="{error.propertyName}">
 			<p>
 				<f:for each="{error.errors}" as="errorDetail">
 					<b title="{errorDetail.propertyName}">
-						Feld: <f:translate key="tx_newssubmit_domain_model_news.{errorDetail.propertyName}" />
+						<f:translate key="formerror.field" />: <f:translate key="tx_newssubmit_domain_model_news.{errorDetail.propertyName}" />
 					</b>
 
 					<f:for each="{errorDetail.errors}" as="errorDetailsOfField">
