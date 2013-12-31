@@ -116,7 +116,7 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 		/**
 		 * @var $message t3lib_mail_Message
 		 */
-		if($this->settings['recipientMail'] !== '') {
+		if($this->settings['recipientMail']) {
 			$message = t3lib_div::makeInstance('t3lib_mail_Message');
 			$from    = t3lib_utility_Mail::getSystemFrom();
 			$message->setFrom($from)
