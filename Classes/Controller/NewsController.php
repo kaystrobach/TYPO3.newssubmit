@@ -45,6 +45,16 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 */
 	protected $categoryRepository;
 
+
+	/**
+	 * Disable default Error FlashMessage
+	 *
+	 * @return string|boolean The flash message or FALSE if no flash message should be set
+	 */
+	protected function getErrorFlashMessage() {
+		return FALSE;
+	}
+
 	/**
 	 * action new
 	 *
