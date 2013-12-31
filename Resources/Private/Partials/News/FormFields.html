@@ -46,6 +46,23 @@
 		<f:translate key="tx_newssubmit_domain_model_news.keywords" />
 	</label>
 	<f:form.textfield property="keywords" id="news_keywords"/>
+
+	<f:if condition="{0:settings.categories.enabled}=={0:'single'}">
+		<f:then>
+			<label for="news_category">
+				<f:translate key="tx_newssubmit_domain_model_news.category" />
+			</label>
+			<f:form.select property="categories" size="1" multiple="" id="news_category" options="{categories}" optionLabelField="title" />
+		</f:then>
+		<f:else>
+			<f:if condition="{settings.categories.enabled}">
+				<label for="news_categories">
+					<f:translate key="tx_newssubmit_domain_model_news.categories" />
+				</label>
+				<f:form.select property="categories" multiple="true" id="news_categories" options="{categories}" optionLabelField="title" />
+			</f:if>
+		</f:else>
+	</f:if>
 </fieldset>
 
 <fieldset>

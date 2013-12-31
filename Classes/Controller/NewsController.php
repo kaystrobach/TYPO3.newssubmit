@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Kay Strobach <typo3@kay-strobach.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -41,6 +41,11 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	protected $newsRepository;
 
 	/**
+	 * @var Tx_News_Domain_Repository_CategoryRepository
+	 */
+	protected $categoryRepository;
+
+	/**
 	 * action new
 	 *
 	 * @param Tx_Newssubmit_Domain_Model_News $newNews
@@ -49,6 +54,7 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function newAction(Tx_Newssubmit_Domain_Model_News $newNews = NULL) {
 		$this->view->assign('newNews', $newNews);
+		$this->view->assign('categories', $this->categoryRepository->findAll());
 	}
 
 	/**
@@ -132,6 +138,16 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function injectNewsRepository(Tx_Newssubmit_Domain_Repository_NewsRepository $newsRepository) {
 		$this->newsRepository = $newsRepository;
+	}
+
+	/**
+	 * injectCategoriesRepository
+	 *
+	 * @param Tx_News_Domain_Repository_CategoryRepository $categoryRepository
+	 * @return void
+	 */
+	public function injectCategoryRepository(Tx_News_Domain_Repository_CategoryRepository $categoryRepository) {
+		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**

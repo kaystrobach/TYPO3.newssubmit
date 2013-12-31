@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Kay Strobach <typo3@kay-strobach.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,13 +25,12 @@
  ***************************************************************/
 
 /**
- *
- *
  * @package newssubmit
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
 class Tx_Newssubmit_Domain_Model_News extends Tx_News_Domain_Model_News {
+
 	/**
 	 * @var string
 	 * @validate NotEmpty
@@ -57,5 +56,14 @@ class Tx_Newssubmit_Domain_Model_News extends Tx_News_Domain_Model_News {
 	 *
 	 */
 	protected $authorEmail;
+
+//	/**
+//	 * Categories
+//	 * This is needed for the 6.* branches until https://review.typo3.org/#/c/26578/ is in
+//	 *
+//	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_News_Domain_Model_Category>
+//	 * @lazy
+//	 */
+//	protected $categories;
 
 }

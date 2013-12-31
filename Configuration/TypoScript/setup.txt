@@ -7,6 +7,10 @@ plugin.tx_newssubmit {
 	persistence {
 		storagePid = {$plugin.tx_newssubmit.persistence.storagePid}
 	}
+	settings {
+		# enable categories posible values; empty = disabled, 1 = mulitple selection, single = single selection
+		categories.enabled = single
+	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
 		# rewrittenPropertyMapper = 1

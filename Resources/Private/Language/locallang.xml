@@ -19,6 +19,8 @@
 			<label index="tx_newssubmit_domain_model_news.image">Image</label>
 
 			<label index="tx_newssubmit_domain_model_news.link">Link</label>
+			<label index="tx_newssubmit_domain_model_news.category">Category</label>
+			<label index="tx_newssubmit_domain_model_news.categories">Categories</label>
 			<label index="tx_newssubmit_domain_model_news.image">Image</label>
 			<label index="tx_newssubmit_domain_model_news.attachment">Attachment</label>
 
