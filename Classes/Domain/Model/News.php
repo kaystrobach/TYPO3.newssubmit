@@ -53,17 +53,6 @@ class Tx_Newssubmit_Domain_Model_News extends Tx_News_Domain_Model_News {
 	 * @var string
 	 * @validate NotEmpty
 	 * @validate EmailAddress
-	 *
 	 */
 	protected $authorEmail;
-
-//	/**
-//	 * Categories
-//	 * This is needed for the 6.* branches until https://review.typo3.org/#/c/26578/ is in
-//	 *
-//	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_News_Domain_Model_Category>
-//	 * @lazy
-//	 */
-//	protected $categories;
-
 }

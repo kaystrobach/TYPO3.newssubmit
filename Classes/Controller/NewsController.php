@@ -46,6 +46,11 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	protected $categoryRepository;
 
 	/**
+	 * @var Tx_Extbase_Domain_Repository_FrontendUserRepository
+	 */
+	protected $frontendUserRepository = NULL;
+
+	/**
 	 * Disable default Error FlashMessage
 	 *
 	 * @return string|boolean The flash message or FALSE if no flash message should be set
@@ -62,8 +67,19 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	public function newAction(Tx_Newssubmit_Domain_Model_News $newNews = NULL) {
+
+		if ($newNews === NULL && $this->getFeUser()) {
+			$feUser = $this->getFeUser();
+			$newNews = new Tx_Newssubmit_Domain_Model_News();
+			$newNews->setAuthor($feUser->getName());
+			$newNews->setAuthorEmail($feUser->getEmail());
+		}
+
 		$this->view->assign('newNews', $newNews);
-		$this->view->assign('categories', $this->categoryRepository->findAll());
+		if (!empty($this->settings['categories']['enabled'])) {
+			$this->view->assign('categories', $this->categoryRepository->findAll());
+		}
+		$this->view->assign('feUser', $this->getFeUser());
 	}
 
 	/**
@@ -75,7 +91,18 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function createAction(Tx_Newssubmit_Domain_Model_News $newNews, $link = '') {
 		$newNews->setDatetime(new DateTime());
-		$newNews->setHidden(1);
+
+		if (empty($this->settings['enableNewItemsByDefault'])) {
+			$newNews->setHidden(1);
+		}
+
+		// cleanup empty category
+		// todo: find cleaner way for this
+		foreach ($newNews->getCategories() as $category) {
+			if ($category === NULL) {
+				$newNews->getCategories()->detach($category);
+			}
+		}
 
 		if($link !== '') {
 			$linkObject = new Tx_News_Domain_Model_Link();
@@ -158,6 +185,14 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	}
 
 	/**
+	 *
+	 * @param Tx_Extbase_Domain_Repository_FrontendUserRepository $frontendUserRepository
+	 */
+	public function injectFrontendUserRepository(Tx_Extbase_Domain_Repository_FrontendUserRepository $frontendUserRepository) {
+		$this->frontendUserRepository = $frontendUserRepository;
+	}
+
+	/**
 	 * action list
 	 *
 	 * @param Tx_Newssubmit_Domain_Model_News $news
@@ -165,6 +200,21 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function thankyouAction(Tx_Newssubmit_Domain_Model_News $news = NULL) {
 
+	}
+
+	/**
+	 * Get current logged-in user
+	 *
+	 * @return null|Tx_Extbase_Domain_Model_FrontendUser
+	 */
+	public function getFeUser() {
+		static $frontEndUser;
+
+		if ($frontEndUser === NULL && isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser && $GLOBALS['TSFE']->fe_user->user['uid']) {
+			$frontEndUser = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+		}
+
+		return $frontEndUser;
 	}
 
 }

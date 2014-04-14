@@ -8,6 +8,7 @@ plugin.tx_newssubmit {
 		storagePid = {$plugin.tx_newssubmit.persistence.storagePid}
 	}
 	settings {
+		enableNewItemsByDefault =
 		# enable categories posible values; empty = disabled, 1 = mulitple selection, single = single selection
 		categories.enabled = single
 		keywords.enabled =

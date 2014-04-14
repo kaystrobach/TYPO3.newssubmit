@@ -4,8 +4,7 @@ config.tx_extbase{
             Tx_News_Domain_Model_News {
                 subclasses {
                     Tx_Newssubmit_News = Tx_Newssubmit_Domain_Model_News
-					
-          		}
+                }
             }
             Tx_Newssubmit_Domain_Model_News {
                 mapping {
@@ -13,7 +12,7 @@ config.tx_extbase{
                     recordType = 0
                 }
             }
-            
-    	}
+
+        }
     }
 }

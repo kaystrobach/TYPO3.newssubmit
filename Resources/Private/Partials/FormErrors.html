@@ -1,6 +1,7 @@
 <f:form.errors>
 	<div class="error">
 		<f:translate key="formerror"/>
+
 		<f:if condition="{error.propertyName}">
 			<p>
 				<f:for each="{error.errors}" as="errorDetail">
@@ -10,12 +11,40 @@
 
 					<f:for each="{errorDetail.errors}" as="errorDetailsOfField">
 						<span title="{errorDetailsOfField.code}">
-							<f:translate key="{errorDetailsOfField.code}" />
+							<f:translate key="{errorDetailsOfField.code}"/>
 						</span>
 					</f:for>
-					<br />
+					<br/>
 				</f:for>
 			</p>
 		</f:if>
 	</div>
 </f:form.errors>
+
+<f:comment>
+	Enable this for 6.2 support
+
+<f:form.validationResults>
+	<f:if condition="{validationResults.flattenedErrors}">
+		<div class="error">
+			<f:translate key="formerror"/>
+
+				<p>
+					<f:for each="{validationResults.flattenedErrors}" as="errorDetail" key="propertyPath">
+						<b title="{propertyPath}">
+							<f:translate key="formerror.field" />: <f:translate key="{propertyPath}" />
+						</b>
+						<f:for each="{errorDetail}" as="errorDetailsOfField">
+							<span title="{errorDetailsOfField.code}">
+								<f:translate key="{errorDetailsOfField.code}"/>
+							</span>
+						</f:for>
+						<br/>
+					</f:for>
+				</p>
+
+		</div>
+	</f:if>
+</f:form.validationResults>
+
+</f:comment>

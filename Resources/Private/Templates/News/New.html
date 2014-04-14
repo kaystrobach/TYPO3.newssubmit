@@ -4,7 +4,7 @@
 
 <f:render partial="FormErrors" />
 
-<f:form action="create"  name="newNews" object="{newNews}" enctype="multipart/form-data">
+<f:form action="create" name="newNews" object="{newNews}" enctype="multipart/form-data">
 	<f:render partial="News/FormFields" arguments="{categories:categories}" />
 		<f:form.submit value="{f:translate(key:'tx_newssubmit_domain_model_news.createNew')}" />
 	</f:form>

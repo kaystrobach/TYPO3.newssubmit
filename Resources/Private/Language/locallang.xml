@@ -28,6 +28,16 @@
 			<label index="tx_newssubmit_domain_model_news.image">Image</label>
 			<label index="tx_newssubmit_domain_model_news.attachment">Attachment</label>
 
+			<label index="newNews.title">Title</label>
+			<label index="newNews.bodytext">Text</label>
+			<label index="newNews.author">Author</label>
+			<label index="newNews.authorEmail">E-Mail</label>
+			<label index="newNews.keywords">Keywords</label>
+			<label index="newNews.link">Link</label>
+			<label index="newNews.categories">Kategorien</label>
+			<label index="newNews.image">Image</label>
+			<label index="newNews.attachment">Attachment</label>
+
 			<label index="tx_newssubmit_domain_model_news.createNew">Create News</label>
 
 			<label index="news.created">You news messages is created</label>
@@ -52,8 +62,20 @@
 			<label index="tx_newssubmit_domain_model_news.authorEmail">E-Mailadresse</label>
 			<label index="tx_newssubmit_domain_model_news.keywords">Schlüsselworte</label>
 			<label index="tx_newssubmit_domain_model_news.link">Link</label>
+			<label index="tx_newssubmit_domain_model_news.category">Kategorie</label>
+			<label index="tx_newssubmit_domain_model_news.categories">Kategorien</label>
 			<label index="tx_newssubmit_domain_model_news.image">Bild</label>
 			<label index="tx_newssubmit_domain_model_news.attachment">Anhang</label>
+
+			<label index="newNews.title">Titel</label>
+			<label index="newNews.bodytext">Text</label>
+			<label index="newNews.author">Autor</label>
+			<label index="newNews.authorEmail">E-Mailadresse</label>
+			<label index="newNews.keywords">Schlüsselworte</label>
+			<label index="newNews.link">Link</label>
+			<label index="newNews.categories">Kategorien</label>
+			<label index="newNews.image">Bild</label>
+			<label index="newNews.attachment">Anhang</label>
 
 			<label index="tx_newssubmit_domain_model_news.createNew">Nachricht anlegen</label>
 
@@ -82,6 +104,16 @@
 			<label index="tx_newssubmit_domain_model_news.categories">Categorieën</label>
 			<label index="tx_newssubmit_domain_model_news.image">Afbeelding</label>
 			<label index="tx_newssubmit_domain_model_news.attachment">Bestand</label>
+
+			<label index="newNews.title">Titel</label>
+			<label index="newNews.bodytext">Tekst</label>
+			<label index="newNews.author">Auteur</label>
+			<label index="newNews.authorEmail">E-Mail</label>
+			<label index="newNews.keywords">Keywords</label>
+			<label index="newNews.link">Link</label>
+			<label index="newNews.categories">Categorieën</label>
+			<label index="newNews.image">Afbeelding</label>
+			<label index="newNews.attachment">Bestand</label>
 
 			<label index="tx_newssubmit_domain_model_news.createNew">Bericht plaatsen</label>
 
