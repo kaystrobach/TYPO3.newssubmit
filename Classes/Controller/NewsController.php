@@ -111,7 +111,8 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 			$newNews->addRelatedLink($linkObject);
 		}
 
-		if($_FILES['tx_newssubmit_newssubmit']['name']['image'] !== '') {
+		// todo: add error handling
+		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['image'])) {
 			$basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 			$fileName = $basicFileFunctions->getUniqueName(
 				$_FILES['tx_newssubmit_newssubmit']['name']['image'],
@@ -128,7 +129,8 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 			$newNews->addMedia($imageObject);
 		}
 
-		if($_FILES['tx_newssubmit_newssubmit']['name']['attachment'] !== '') {
+		// todo: add error handling
+		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['attachment'])) {
 			$basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 			$fileName = $basicFileFunctions->getUniqueName(
 				$_FILES['tx_newssubmit_newssubmit']['name']['attachment'],
