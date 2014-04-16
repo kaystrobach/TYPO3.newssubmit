@@ -1,20 +1,5 @@
-<style>
-	label {
-		display: block;
-		width: 150px;
-		clear: both;
-		float: left;
-		margin-top: 10px;
-
-	}
-	input, textarea {
-		float: left;
-		margin-top: 10px;
-		width: 400px;
-	}
-</style>
 <fieldset>
-	<legend>Nachricht</legend>
+	<legend><f:translate key="header.message" /></legend>
 
 	<label for="news_title">
 		<f:translate key="tx_newssubmit_domain_model_news.title" />
@@ -30,7 +15,7 @@
 </fieldset>
 
 <fieldset>
-	<legend>Metadaten</legend>
+	<legend><f:translate key="header.metadata" /></legend>
 
 	<label for="news_author">
 		<f:translate key="tx_newssubmit_domain_model_news.author" />
@@ -42,29 +27,54 @@
 	</label>
 	<f:form.textfield property="authorEmail" id="news_authorEmail"/>
 
-	<label for="news_keywords">
-		<f:translate key="tx_newssubmit_domain_model_news.keywords" />
-	</label>
-	<f:form.textfield property="keywords" id="news_keywords"/>
+	<f:if condition="{settings.keywords.enabled}">
+		<label for="news_keywords">
+			<f:translate key="tx_newssubmit_domain_model_news.keywords" />
+		</label>
+		<f:form.textfield property="keywords" id="news_keywords"/>
+	</f:if>
+
+	<f:if condition="{0:settings.categories.enabled}=={0:'single'}">
+		<f:then>
+			<label for="news_category">
+				<f:translate key="tx_newssubmit_domain_model_news.category" />
+			</label>
+			<f:form.select property="categories" multiple="" size="1" id="news_category" prependOptionValue="" prependOptionLabel="" options="{categories}" optionLabelField="title" />
+		</f:then>
+		<f:else>
+			<f:if condition="{settings.categories.enabled}">
+				<label for="news_categories">
+					<f:translate key="tx_newssubmit_domain_model_news.categories" />
+				</label>
+				<f:form.select property="categories" multiple="true" id="news_categories" options="{categories}" optionLabelField="title" />
+			</f:if>
+		</f:else>
+	</f:if>
 </fieldset>
 
 <fieldset>
-	<legend>Verweise</legend>
+	<legend><f:translate key="header.references" /></legend>
 
-	<label for="news_link">
-		<f:translate key="tx_newssubmit_domain_model_news.link" />
-	</label>
-	<f:form.textfield name="link" id="news_link"/>
+	<f:if condition="{settings.link.enabled}">
+		<label for="news_link">
+			<f:translate key="tx_newssubmit_domain_model_news.link" />
+		</label>
+		<f:form.textfield name="link" id="news_link"/>
+	</f:if>
 
-	<label for="news_image">
-		<f:translate key="tx_newssubmit_domain_model_news.image" />
-	</label>
-	<f:form.upload name="image" id="news_image"/>
+	<f:if condition="{settings.image.enabled}">
+		<label for="news_image">
+			<f:translate key="tx_newssubmit_domain_model_news.image" />
+		</label>
+		<f:form.upload name="image" id="news_image"/>
+	</f:if>
 
-	<label for="news_attachment">
-		<f:translate key="tx_newssubmit_domain_model_news.attachment" />
-	</label>
-	<f:form.upload name="attachment" id="news_attachment"/>
+	<f:if condition="{settings.keywords.attachment}">
+		<label for="news_attachment">
+			<f:translate key="tx_newssubmit_domain_model_news.attachment" />
+		</label>
+		<f:form.upload name="attachment" id="news_attachment"/>
+	</f:if>
 </fieldset>
 
 

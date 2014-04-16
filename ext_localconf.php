@@ -8,13 +8,9 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	'Newssubmit',
 	array(
 		'News' => 'new, create, thankyou',
-		
 	),
 	// non-cacheable actions
 	array(
 		'News' => 'new, create',
-		
 	)
 );
-
-?>
