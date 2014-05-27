@@ -148,21 +148,11 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 
 		// save news
 		$this->newsRepository->add($newNews);
-<<<<<<< HEAD
-		$this->flashMessageContainer->add('Ihre News wurde erstellt.');
-
-		// send mail
-		/**
-		 * @var $message t3lib_mail_Message
-		 */
-		if($this->settings['recipientMail'] !== '') {
-=======
 		$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('news.created', $this->controllerContext->getRequest()->getControllerExtensionName()));
 
 		// send mail
 		if($this->settings['recipientMail']) {
 			/** @var $message t3lib_mail_Message */
->>>>>>> 54da00df99a518d2551793112bef222bf3e90039
 			$message = t3lib_div::makeInstance('t3lib_mail_Message');
 			$from    = t3lib_utility_Mail::getSystemFrom();
 			$message->setFrom($from)
@@ -207,12 +197,9 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * action list
 	 *
-	 * @param Tx_Newssubmit_Domain_Model_News $news
 	 * @return void
 	 */
-	public function thankyouAction(Tx_Newssubmit_Domain_Model_News $news = NULL) {
-<<<<<<< HEAD
-=======
+	public function thankyouAction() {
 
 	}
 
@@ -227,7 +214,6 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 		if ($frontEndUser === NULL && isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser && $GLOBALS['TSFE']->fe_user->user['uid']) {
 			$frontEndUser = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
 		}
->>>>>>> 54da00df99a518d2551793112bef222bf3e90039
 
 		return $frontEndUser;
 	}
