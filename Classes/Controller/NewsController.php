@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Kay Strobach <typo3@kay-strobach.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -41,6 +41,25 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	protected $newsRepository;
 
 	/**
+	 * @var Tx_News_Domain_Repository_CategoryRepository
+	 */
+	protected $categoryRepository;
+
+	/**
+	 * @var Tx_Extbase_Domain_Repository_FrontendUserRepository
+	 */
+	protected $frontendUserRepository = NULL;
+
+	/**
+	 * Disable default Error FlashMessage
+	 *
+	 * @return string|boolean The flash message or FALSE if no flash message should be set
+	 */
+	protected function getErrorFlashMessage() {
+		return FALSE;
+	}
+
+	/**
 	 * action new
 	 *
 	 * @param Tx_Newssubmit_Domain_Model_News $newNews
@@ -48,7 +67,19 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 * @return void
 	 */
 	public function newAction(Tx_Newssubmit_Domain_Model_News $newNews = NULL) {
+
+		if ($newNews === NULL && $this->getFeUser()) {
+			$feUser = $this->getFeUser();
+			$newNews = new Tx_Newssubmit_Domain_Model_News();
+			$newNews->setAuthor($feUser->getName());
+			$newNews->setAuthorEmail($feUser->getEmail());
+		}
+
 		$this->view->assign('newNews', $newNews);
+		if (!empty($this->settings['categories']['enabled'])) {
+			$this->view->assign('categories', $this->categoryRepository->findAll());
+		}
+		$this->view->assign('feUser', $this->getFeUser());
 	}
 
 	/**
@@ -58,9 +89,20 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	 * @param string $link
 	 * @return void
 	 */
-	public function createAction(Tx_Newssubmit_Domain_Model_News $newNews, $link) {
+	public function createAction(Tx_Newssubmit_Domain_Model_News $newNews, $link = '') {
 		$newNews->setDatetime(new DateTime());
-		$newNews->setHidden(1);
+
+		if (empty($this->settings['enableNewItemsByDefault'])) {
+			$newNews->setHidden(1);
+		}
+
+		// cleanup empty category
+		// todo: find cleaner way for this
+		foreach ($newNews->getCategories() as $category) {
+			if ($category === NULL) {
+				$newNews->getCategories()->detach($category);
+			}
+		}
 
 		if($link !== '') {
 			$linkObject = new Tx_News_Domain_Model_Link();
@@ -69,7 +111,8 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 			$newNews->addRelatedLink($linkObject);
 		}
 
-		if($_FILES['tx_newssubmit_newssubmit']['name']['image'] !== '') {
+		// todo: add error handling
+		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['image'])) {
 			$basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 			$fileName = $basicFileFunctions->getUniqueName(
 				$_FILES['tx_newssubmit_newssubmit']['name']['image'],
@@ -86,7 +129,8 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 			$newNews->addMedia($imageObject);
 		}
 
-		if($_FILES['tx_newssubmit_newssubmit']['name']['attachment'] !== '') {
+		// todo: add error handling
+		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['attachment'])) {
 			$basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 			$fileName = $basicFileFunctions->getUniqueName(
 				$_FILES['tx_newssubmit_newssubmit']['name']['attachment'],
@@ -104,6 +148,7 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 
 		// save news
 		$this->newsRepository->add($newNews);
+<<<<<<< HEAD
 		$this->flashMessageContainer->add('Ihre News wurde erstellt.');
 
 		// send mail
@@ -111,6 +156,13 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 		 * @var $message t3lib_mail_Message
 		 */
 		if($this->settings['recipientMail'] !== '') {
+=======
+		$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('news.created', $this->controllerContext->getRequest()->getControllerExtensionName()));
+
+		// send mail
+		if($this->settings['recipientMail']) {
+			/** @var $message t3lib_mail_Message */
+>>>>>>> 54da00df99a518d2551793112bef222bf3e90039
 			$message = t3lib_div::makeInstance('t3lib_mail_Message');
 			$from    = t3lib_utility_Mail::getSystemFrom();
 			$message->setFrom($from)
@@ -135,13 +187,49 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	}
 
 	/**
+	 * injectCategoriesRepository
+	 *
+	 * @param Tx_News_Domain_Repository_CategoryRepository $categoryRepository
+	 * @return void
+	 */
+	public function injectCategoryRepository(Tx_News_Domain_Repository_CategoryRepository $categoryRepository) {
+		$this->categoryRepository = $categoryRepository;
+	}
+
+	/**
+	 *
+	 * @param Tx_Extbase_Domain_Repository_FrontendUserRepository $frontendUserRepository
+	 */
+	public function injectFrontendUserRepository(Tx_Extbase_Domain_Repository_FrontendUserRepository $frontendUserRepository) {
+		$this->frontendUserRepository = $frontendUserRepository;
+	}
+
+	/**
 	 * action list
 	 *
 	 * @param Tx_Newssubmit_Domain_Model_News $news
 	 * @return void
 	 */
 	public function thankyouAction(Tx_Newssubmit_Domain_Model_News $news = NULL) {
+<<<<<<< HEAD
+=======
 
+	}
+
+	/**
+	 * Get current logged-in user
+	 *
+	 * @return null|Tx_Extbase_Domain_Model_FrontendUser
+	 */
+	public function getFeUser() {
+		static $frontEndUser;
+
+		if ($frontEndUser === NULL && isset($GLOBALS['TSFE']) && $GLOBALS['TSFE']->loginUser && $GLOBALS['TSFE']->fe_user->user['uid']) {
+			$frontEndUser = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+		}
+>>>>>>> 54da00df99a518d2551793112bef222bf3e90039
+
+		return $frontEndUser;
 	}
 
 }

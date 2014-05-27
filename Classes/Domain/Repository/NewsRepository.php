@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2013 Kay Strobach <typo3@kay-strobach.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,4 +34,3 @@
 class Tx_Newssubmit_Domain_Repository_NewsRepository extends Tx_Extbase_Persistence_Repository {
 
 }
-?>
