@@ -261,4 +261,40 @@ class NewsController extends ActionController {
 		return $frontEndUser;
 	}
 
+	/**
+	 * Edit news item
+	 *
+	 * @param News $news
+	 */
+	public function editAction(News $news) {
+		$this->view->assign('news', $news);
+		if (!empty($this->settings['categories']['enabled'])) {
+			$this->view->assign('categories', $this->categoryRepository->findAll());
+		}
+	}
+
+	/**
+	 * Update news item
+	 *
+	 * @param News $news
+	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+	 * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+	 */
+	public function updateAction(News $news) {
+		$this->newsRepository->update($news);
+
+		// clear page cache after save
+		if (!$news->getHidden()) {
+			$this->flushNewsCache($news);
+		}
+
+		$this->redirect('list');
+	}
+
+	/**
+	 * list available news
+	 */
+	public function listAction() {
+		$this->view->assign('news', $this->newsRepository->findAll());
+	}
 }

@@ -39,8 +39,9 @@
 			<label index="newNews.attachment">Attachment</label>
 
 			<label index="tx_newssubmit_domain_model_news.createNew">Create News</label>
+			<label index="tx_newssubmit_domain_model_news.save">Save Changes</label>
 
-			<label index="news.created">You news messages is created</label>
+			<label index="news.created">Your news has been created</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tx_newssubmit_domain_model_news">Nachricht</label>
@@ -78,6 +79,7 @@
 			<label index="newNews.attachment">Anhang</label>
 
 			<label index="tx_newssubmit_domain_model_news.createNew">Nachricht anlegen</label>
+			<label index="tx_newssubmit_domain_model_news.save">Änderungen Speichern</label>
 
 			<label index="news.created">Ihre News wurde erstellt.</label>
 
