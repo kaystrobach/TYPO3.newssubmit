@@ -218,4 +218,27 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 		return $frontEndUser;
 	}
 
+	/**
+	 * @param Tx_Newssubmit_Domain_Model_News $news
+	 */
+	public function editAction(Tx_Newssubmit_Domain_Model_News $news) {
+		$this->view->assign('news', $news);
+	}
+
+	/**
+	 * @param Tx_Newssubmit_Domain_Model_News $news
+	 * @throws Tx_Extbase_Persistence_Exception_IllegalObjectType
+	 * @throws Tx_Extbase_Persistence_Exception_UnknownObject
+	 */
+	public function updateAction(Tx_Newssubmit_Domain_Model_News $news) {
+		$this->newsRepository->update($news);
+		$this->redirect('list');
+	}
+
+	/**
+	 * list available news
+	 */
+	public function listAction() {
+		$this->view->assign('news', $this->newsRepository->findAll());
+	}
 }
