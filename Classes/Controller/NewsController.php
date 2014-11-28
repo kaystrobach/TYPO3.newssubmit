@@ -162,6 +162,11 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 				->send();
 		}
 
+		// clear page cache after save
+		if (!$newNews->getHidden()) {
+			$this->cacheService->clearPageCache();
+		}
+
 		// go to thank you action
 		$this->redirect('thankyou');
 	}
