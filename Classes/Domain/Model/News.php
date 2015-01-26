@@ -1,4 +1,5 @@
 <?php
+namespace MiniFranske\Newssubmit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -29,7 +30,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Newssubmit_Domain_Model_News extends Tx_News_Domain_Model_News {
+class News extends \Tx_News_Domain_Model_News {
 
 	/**
 	 * @var string

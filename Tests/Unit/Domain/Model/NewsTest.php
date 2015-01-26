@@ -1,10 +1,11 @@
 <?php
+namespace MiniFranske\Newssubmit\Tests\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Kay Strobach <typo3@kay-strobach.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,8 +25,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\Newssubmit\Domain\Model\News;
+
 /**
- * Test case for class Tx_Newssubmit_Domain_Model_News.
+ * Test case for class News.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,26 +39,26 @@
  *
  * @author Kay Strobach <typo3@kay-strobach.de>
  */
-class Tx_Newssubmit_Domain_Model_NewsTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class NewsTest extends BaseTestCase {
 	/**
-	 * @var Tx_Newssubmit_Domain_Model_News
+	 * @var News
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Newssubmit_Domain_Model_News();
+		$this->fixture = new News();
 	}
 
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
+
 	/**
 	 * @test
 	 */
 	public function dummyTestToNotLeaveThisFileEmpty() {
 		$this->markTestIncomplete();
 	}
-	
+
 }
 ?>

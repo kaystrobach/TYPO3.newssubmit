@@ -1,18 +1,12 @@
 config.tx_extbase{
     persistence{
         classes{
-            Tx_News_Domain_Model_News {
-                subclasses {
-                    Tx_Newssubmit_News = Tx_Newssubmit_Domain_Model_News
-                }
-            }
-            Tx_Newssubmit_Domain_Model_News {
+            MiniFranske\Newssubmit\Domain\Model\News {
                 mapping {
                     tableName = tx_news_domain_model_news
                     recordType = 0
                 }
             }
-
         }
     }
 }

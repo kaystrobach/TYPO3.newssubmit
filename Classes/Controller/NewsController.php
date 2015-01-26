@@ -1,4 +1,5 @@
 <?php
+namespace MiniFranske\Newssubmit\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -24,6 +25,15 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use MiniFranske\Newssubmit\Domain\Model\News;
+use MiniFranske\Newssubmit\Domain\Repository\NewsRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MailUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
 /**
  *
  *
@@ -31,22 +41,22 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_ActionController {
+class NewsController extends ActionController {
 
 	/**
 	 * newsRepository
 	 *
-	 * @var Tx_Newssubmit_Domain_Repository_NewsRepository
+	 * @var \MiniFranske\Newssubmit\Domain\Repository\NewsRepository
 	 */
 	protected $newsRepository;
 
 	/**
-	 * @var Tx_News_Domain_Repository_CategoryRepository
+	 * @var \Tx_News_Domain_Repository_CategoryRepository
 	 */
 	protected $categoryRepository;
 
 	/**
-	 * @var Tx_Extbase_Domain_Repository_FrontendUserRepository
+	 * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
 	 */
 	protected $frontendUserRepository = NULL;
 
@@ -62,15 +72,15 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * action new
 	 *
-	 * @param Tx_Newssubmit_Domain_Model_News $newNews
+	 * @param News $newNews
 	 * @dontvalidate $newNews
 	 * @return void
 	 */
-	public function newAction(Tx_Newssubmit_Domain_Model_News $newNews = NULL) {
+	public function newAction(News $newNews = NULL) {
 
 		if ($newNews === NULL && $this->getFeUser()) {
 			$feUser = $this->getFeUser();
-			$newNews = new Tx_Newssubmit_Domain_Model_News();
+			$newNews = new News();
 			$newNews->setAuthor($feUser->getName());
 			$newNews->setAuthorEmail($feUser->getEmail());
 		}
@@ -85,12 +95,12 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * action create
 	 *
-	 * @param Tx_Newssubmit_Domain_Model_News $newNews
+	 * @param News $newNews
 	 * @param string $link
 	 * @return void
 	 */
-	public function createAction(Tx_Newssubmit_Domain_Model_News $newNews, $link = '') {
-		$newNews->setDatetime(new DateTime());
+	public function createAction(News $newNews, $link = '') {
+		$newNews->setDatetime(new \DateTime());
 
 		if (empty($this->settings['enableNewItemsByDefault'])) {
 			$newNews->setHidden(1);
@@ -105,7 +115,7 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 		}
 
 		if($link !== '') {
-			$linkObject = new Tx_News_Domain_Model_Link();
+			$linkObject = new \Tx_News_Domain_Model_Link();
 			$linkObject->setUri($link);
 			$linkObject->setTitle($link);
 			$newNews->addRelatedLink($linkObject);
@@ -113,16 +123,16 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 
 		// todo: add error handling
 		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['image'])) {
-			$basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
+			$basicFileFunctions = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
 			$fileName = $basicFileFunctions->getUniqueName(
 				$_FILES['tx_newssubmit_newssubmit']['name']['image'],
-				t3lib_div::getFileAbsFileName('uploads/tx_news/')
+				GeneralUtility::getFileAbsFileName('uploads/tx_news/')
 			);
-			t3lib_div::upload_copy_move(
+			GeneralUtility::upload_copy_move(
 				$_FILES['tx_newssubmit_newssubmit']['tmp_name']['image'],
 				$fileName
 			);
-			$imageObject = new Tx_News_Domain_Model_Media();
+			$imageObject = new \Tx_News_Domain_Model_Media();
 			$imageObject->setTitle($newNews->getTitle());
 			$imageObject->setImage(basename($fileName));
 			$imageObject->setShowinpreview(1);
@@ -131,16 +141,16 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 
 		// todo: add error handling
 		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['attachment'])) {
-			$basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
+			$basicFileFunctions = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
 			$fileName = $basicFileFunctions->getUniqueName(
 				$_FILES['tx_newssubmit_newssubmit']['name']['attachment'],
-				t3lib_div::getFileAbsFileName('uploads/tx_news/')
+				GeneralUtility::getFileAbsFileName('uploads/tx_news/')
 			);
-			t3lib_div::upload_copy_move(
+			GeneralUtility::upload_copy_move(
 				$_FILES['tx_newssubmit_newssubmit']['tmp_name']['attachment'],
 				$fileName
 			);
-			$attachmentObject = new Tx_News_Domain_Model_File();
+			$attachmentObject = new \Tx_News_Domain_Model_File();
 			$attachmentObject->setTitle(basename($fileName));
 			$attachmentObject->setFile(basename($fileName));
 			$newNews->addRelatedFile($attachmentObject);
@@ -148,13 +158,13 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 
 		// save news
 		$this->newsRepository->add($newNews);
-		$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('news.created', $this->controllerContext->getRequest()->getControllerExtensionName()));
+		$this->addFlashMessage(LocalizationUtility::translate('news.created', $this->extensionName));
 
 		// send mail
 		if($this->settings['recipientMail']) {
-			/** @var $message t3lib_mail_Message */
-			$message = t3lib_div::makeInstance('t3lib_mail_Message');
-			$from    = t3lib_utility_Mail::getSystemFrom();
+			/** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
+			$message = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+			$from = MailUtility::getSystemFrom();
 			$message->setFrom($from)
 				->setTo(array($this->settings['recipientMail'] => 'News Manager'))
 				->setSubject('[New News] ' . $newNews->getTitle())
@@ -174,45 +184,46 @@ class Tx_Newssubmit_Controller_NewsController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * injectNewsRepository
 	 *
-	 * @param Tx_Newssubmit_Domain_Repository_NewsRepository $newsRepository
+	 * @param NewsRepository $newsRepository
 	 * @return void
 	 */
-	public function injectNewsRepository(Tx_Newssubmit_Domain_Repository_NewsRepository $newsRepository) {
+	public function injectNewsRepository(NewsRepository $newsRepository) {
 		$this->newsRepository = $newsRepository;
 	}
 
 	/**
 	 * injectCategoriesRepository
 	 *
-	 * @param Tx_News_Domain_Repository_CategoryRepository $categoryRepository
+	 * @param \Tx_News_Domain_Repository_CategoryRepository $categoryRepository
 	 * @return void
 	 */
-	public function injectCategoryRepository(Tx_News_Domain_Repository_CategoryRepository $categoryRepository) {
+	public function injectCategoryRepository(\Tx_News_Domain_Repository_CategoryRepository $categoryRepository) {
 		$this->categoryRepository = $categoryRepository;
 	}
 
 	/**
+	 * Inject Frontend User Repository
 	 *
-	 * @param Tx_Extbase_Domain_Repository_FrontendUserRepository $frontendUserRepository
+	 * @param FrontendUserRepository $frontendUserRepository
 	 */
-	public function injectFrontendUserRepository(Tx_Extbase_Domain_Repository_FrontendUserRepository $frontendUserRepository) {
+	public function injectFrontendUserRepository(FrontendUserRepository $frontendUserRepository) {
 		$this->frontendUserRepository = $frontendUserRepository;
 	}
 
 	/**
 	 * action list
 	 *
-	 * @param Tx_Newssubmit_Domain_Model_News $news
+	 * @param News $news
 	 * @return void
 	 */
-	public function thankyouAction(Tx_Newssubmit_Domain_Model_News $news = NULL) {
+	public function thankyouAction(News $news = NULL) {
 
 	}
 
 	/**
 	 * Get current logged-in user
 	 *
-	 * @return null|Tx_Extbase_Domain_Model_FrontendUser
+	 * @return null|FrontendUser
 	 */
 	public function getFeUser() {
 		static $frontEndUser;

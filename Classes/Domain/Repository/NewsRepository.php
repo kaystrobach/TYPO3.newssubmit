@@ -1,4 +1,5 @@
 <?php
+namespace MiniFranske\Newssubmit\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -31,6 +32,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Newssubmit_Domain_Repository_NewsRepository extends Tx_Extbase_Persistence_Repository {
+class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }
