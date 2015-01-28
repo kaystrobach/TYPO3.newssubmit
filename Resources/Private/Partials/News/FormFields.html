@@ -1,3 +1,5 @@
+{namespace ns=MiniFranske\Newssubmit\ViewHelpers}
+
 <fieldset>
 	<legend><f:translate key="header.message" /></legend>
 
@@ -66,14 +68,42 @@
 		<label for="news_image">
 			<f:translate key="tx_newssubmit_domain_model_news.image" />
 		</label>
-		<f:form.upload name="image" id="news_image"/>
+		<ns:form.upload property="falMedia.0">
+			<f:if condition="{resource}">
+				<f:image image="{resource}" alt="" width="50"/>
+			</f:if>
+			<ns:form.getError property="{property}" />
+		</ns:form.upload>
+		<ns:form.upload property="falMedia.1">
+			<f:if condition="{resource}">
+				<f:image image="{resource}" alt="" width="50"/>
+			</f:if>
+			<ns:form.getError property="{property}" />
+		</ns:form.upload>
+		<ns:form.upload property="falMedia.2">
+			<f:if condition="{resource}">
+				<f:image image="{resource}" alt="" width="50"/>
+			</f:if>
+			<ns:form.getError property="{property}" />
+		</ns:form.upload>
+		<ns:form.upload property="falMedia.3">
+			<f:if condition="{resource}">
+				<f:image image="{resource}" alt="" width="50"/>
+			</f:if>
+			<ns:form.getError property="{property}" />
+		</ns:form.upload>
 	</f:if>
 
 	<f:if condition="{settings.keywords.attachment}">
 		<label for="news_attachment">
 			<f:translate key="tx_newssubmit_domain_model_news.attachment" />
 		</label>
-		<f:form.upload name="attachment" id="news_attachment"/>
+		<ns:form.upload property="falRelatedFiles.0">
+			<f:if condition="{resource}">
+				{resource.originalResource.name}
+			</f:if>
+			<ns:form.getError property="{property}" />
+		</ns:form.upload>
 	</f:if>
 </fieldset>
 

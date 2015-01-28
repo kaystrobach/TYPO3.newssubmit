@@ -14,3 +14,11 @@ if (!defined('TYPO3_MODE')) {
 		'News' => 'new, create',
 	)
 );
+
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter(
+	'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter'
+);
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter(
+	'MiniFranske\\Newssubmit\\Property\\TypeConverter\\ObjectStorageConverter'
+);

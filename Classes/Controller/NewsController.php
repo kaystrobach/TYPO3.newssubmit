@@ -27,6 +27,7 @@ namespace MiniFranske\Newssubmit\Controller;
 
 use MiniFranske\Newssubmit\Domain\Model\News;
 use MiniFranske\Newssubmit\Domain\Repository\NewsRepository;
+use MiniFranske\Newssubmit\Property\TypeConverter\UploadedFileReferenceConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
@@ -67,6 +68,78 @@ class NewsController extends ActionController {
 	 */
 	protected function getErrorFlashMessage() {
 		return FALSE;
+	}
+
+	/**
+	 * Set TypeConverter option for file upload
+	 */
+	public function initializeCreateAction() {
+		$this->setTypeConverterConfigurationForFileUpload('newNews');
+	}
+
+	/**
+	 * Set TypeConverter option for file upload
+	 */
+	public function initializeUpdateAction() {
+		$this->setTypeConverterConfigurationForFileUpload('news');
+	}
+
+	/**
+	 * Set file upload type converters
+	 *
+	 * @param $argumentName
+	 */
+	protected function setTypeConverterConfigurationForFileUpload($argumentName) {
+		$mediaUploadConfiguration = array(
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => $this->settings['imageFolder'],
+		);
+		$relatedFileUploadConfiguration = array(
+			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => NULL,
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => $this->settings['imageFolder'],
+		);
+		/** @var PropertyMappingConfiguration $newsConfiguration */
+		$newsConfiguration = $this->arguments[$argumentName]->getPropertyMappingConfiguration();
+		$newsConfiguration->forProperty('falMedia.0')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$mediaUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falMedia.1')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$mediaUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falMedia.2')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$mediaUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falMedia.3')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$mediaUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falRelatedFiles.0')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$relatedFileUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falRelatedFiles.1')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$relatedFileUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falRelatedFiles.2')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$relatedFileUploadConfiguration
+			);
+		$newsConfiguration->forProperty('falRelatedFiles.3')
+			->setTypeConverterOptions(
+				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				$relatedFileUploadConfiguration
+			);
 	}
 
 	/**
@@ -119,41 +192,6 @@ class NewsController extends ActionController {
 			$linkObject->setUri($link);
 			$linkObject->setTitle($link);
 			$newNews->addRelatedLink($linkObject);
-		}
-
-		// todo: add error handling
-		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['image'])) {
-			$basicFileFunctions = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
-			$fileName = $basicFileFunctions->getUniqueName(
-				$_FILES['tx_newssubmit_newssubmit']['name']['image'],
-				GeneralUtility::getFileAbsFileName('uploads/tx_news/')
-			);
-			GeneralUtility::upload_copy_move(
-				$_FILES['tx_newssubmit_newssubmit']['tmp_name']['image'],
-				$fileName
-			);
-			$imageObject = new \Tx_News_Domain_Model_Media();
-			$imageObject->setTitle($newNews->getTitle());
-			$imageObject->setImage(basename($fileName));
-			$imageObject->setShowinpreview(1);
-			$newNews->addMedia($imageObject);
-		}
-
-		// todo: add error handling
-		if(!empty($_FILES['tx_newssubmit_newssubmit']['name']['attachment'])) {
-			$basicFileFunctions = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
-			$fileName = $basicFileFunctions->getUniqueName(
-				$_FILES['tx_newssubmit_newssubmit']['name']['attachment'],
-				GeneralUtility::getFileAbsFileName('uploads/tx_news/')
-			);
-			GeneralUtility::upload_copy_move(
-				$_FILES['tx_newssubmit_newssubmit']['tmp_name']['attachment'],
-				$fileName
-			);
-			$attachmentObject = new \Tx_News_Domain_Model_File();
-			$attachmentObject->setTitle(basename($fileName));
-			$attachmentObject->setFile(basename($fileName));
-			$newNews->addRelatedFile($attachmentObject);
 		}
 
 		// save news
