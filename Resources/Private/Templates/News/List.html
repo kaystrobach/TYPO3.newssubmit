@@ -1,32 +1,20 @@
 <f:layout name="Default" />
 
-This template displays a NEW form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-Resources:
-Private:
-Templates:
-New.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
 
-	<div style="display:none;">
-		<f:flashMessages />
-	</div>
+	<f:flashMessages />
 
 	<f:render partial="FormErrors" />
 
 	<f:link.action action="new">
 		{f:translate(key:'tx_newssubmit_domain_model_news.createNew')}
 	</f:link.action>
-	<table>
+
+	<table class="table">
 		<f:for each="{news}" as="{newsEntry}">
 			<tr>
 				<td>
-					{news.crdate -> f:format.date(format:'d.m.Y')}
+					{news.crdate -> f:format.date()}
 				</td>
 				<td>
 					<f:link.action action="edit" arguments="{news:newsEntry}">

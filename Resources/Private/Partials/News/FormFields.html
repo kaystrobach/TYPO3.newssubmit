@@ -1,3 +1,5 @@
+{namespace ns=T3ext\Newssubmit\ViewHelpers}
+
 <fieldset>
 	<legend><f:translate key="header.message" /></legend>
 
@@ -62,18 +64,32 @@
 		<f:form.textfield name="link" id="news_link"/>
 	</f:if>
 
-	<f:if condition="{settings.image.enabled}">
+	<f:if condition="{settings.image.count}">
 		<label for="news_image">
 			<f:translate key="tx_newssubmit_domain_model_news.image" />
 		</label>
-		<f:form.upload name="image" id="news_image"/>
+		<ns:loop count="{settings.image.count}">
+			<ns:form.upload property="falMedia.{index}">
+				<f:if condition="{resource}">
+					<f:image image="{resource}" alt="" width="50"/>
+				</f:if>
+				<ns:form.getError property="{property}" />
+			</ns:form.upload>
+		</ns:loop>
 	</f:if>
 
-	<f:if condition="{settings.keywords.attachment}">
+	<f:if condition="{settings.attachment.count}">
 		<label for="news_attachment">
 			<f:translate key="tx_newssubmit_domain_model_news.attachment" />
 		</label>
-		<f:form.upload name="attachment" id="news_attachment"/>
+		<ns:loop count="{settings.attachment.count}">
+			<ns:form.upload property="falRelatedFiles.{index}">
+				<f:if condition="{resource}">
+					{resource.originalResource.name}
+				</f:if>
+				<ns:form.getError property="{property}" />
+			</ns:form.upload>
+		</ns:loop>
 	</f:if>
 </fieldset>
 

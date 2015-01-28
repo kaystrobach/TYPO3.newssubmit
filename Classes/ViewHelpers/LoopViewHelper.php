@@ -1,10 +1,10 @@
 <?php
-namespace T3ext\Newssubmit\Domain\Repository;
+namespace T3ext\Newssubmit\ViewHelpers;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Kay Strobach <typo3@kay-strobach.de>
+ *  (c) 2015 Frans Saris <franssaris@gmail.com>
  *
  *  All rights reserved
  *
@@ -25,13 +25,27 @@ namespace T3ext\Newssubmit\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- *
- *
- * @package newssubmit
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
-class NewsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
+/**
+ * Class LoopViewHelper
+ */
+class LoopViewHelper extends AbstractViewHelper {
+
+	/**
+	 * Render a part x times
+	 *
+	 * @param int $count
+	 * @param string $as
+	 * @return string
+	 */
+	public function render($count, $as = 'index') {
+		$output = '';
+		for ($i = 0; $i < (int)$count; $i++) {
+			$this->templateVariableContainer->add($as, $i);
+			$output .= $this->renderChildren();
+			$this->templateVariableContainer->remove($as);
+		}
+		return $output;
+	}
 }
