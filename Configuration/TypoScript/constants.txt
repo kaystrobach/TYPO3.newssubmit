@@ -11,4 +11,10 @@ plugin.tx_newssubmit {
 		# cat=plugin.tx_newssubmit//a; type=string; label=Default storage PID
 		storagePid =
 	}
+	settings {
+		# cat=plugin.tx_newssubmit//b; type=string; label=Folder (combined identifier) to put uploaded images
+		imagesFolder = 1:/user_upload/
+		# cat=plugin.tx_newssubmit//c; type=string; label=Folder (combined identifier) to put uploaded attachments
+		attachmentsFolder = 1:/user_upload/
+	}
 }

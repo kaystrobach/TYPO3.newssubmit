@@ -13,8 +13,12 @@ plugin.tx_newssubmit {
 		categories.enabled = single
 		keywords.enabled =
 		link.enabled =
-		image.enabled =
-		attachment.enabled =
+
+		image.count = 4
+		attachment.count = 4
+
+		imagesFolder = {$plugin.tx_newssubmit.settings.imagesFolder}
+		attachmentsFolder = {$plugin.tx_newssubmit.settings.attachmentsFolder}
 	}
 }
 
