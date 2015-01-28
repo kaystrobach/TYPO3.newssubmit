@@ -178,11 +178,33 @@ class NewsController extends ActionController {
 
 		// clear page cache after save
 		if (!$newNews->getHidden()) {
-			$this->cacheService->clearPageCache();
+			$this->flushNewsCache($newNews);
 		}
 
 		// go to thank you action
 		$this->redirect('thankyou');
+	}
+
+	/**
+	 * Flush cache (like in Tx_News_Hooks_Tcemain::clearCachePostProc())
+	 *
+	 * @param News $news
+	 */
+	protected function flushNewsCache(News $news) {
+		$cacheTagsToFlush = array();
+		if ($news->getUid()) {
+			$cacheTagsToFlush[] = 'tx_news_uid_' . $news->getUid();
+		}
+		if ($news->getPid()) {
+			$cacheTagsToFlush[] = 'tx_news_pid_' . $news->getPid();
+		}
+
+		/** @var $cacheManager \TYPO3\CMS\Core\Cache\CacheManager */
+		$cacheManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager');
+		foreach ($cacheTagsToFlush as $cacheTag) {
+			$cacheManager->getCache('cache_pages')->flushByTag($cacheTag);
+			$cacheManager->getCache('cache_pagesection')->flushByTag($cacheTag);
+		}
 	}
 
 	/**
