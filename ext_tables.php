@@ -8,6 +8,11 @@ if (!defined('TYPO3_MODE')) {
 	'Newssubmit',
 	'News Submit'
 );
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	$_EXTKEY,
+	'NewsFeEdit',
+	'News FE edit'
+);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
 	$_EXTKEY,

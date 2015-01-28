@@ -7,11 +7,22 @@ if (!defined('TYPO3_MODE')) {
 	'T3ext.' . $_EXTKEY,
 	'Newssubmit',
 	array(
-		'News' => 'new, create, thankyou, list, edit, update',
+		'News' => 'new, create, thankyou',
 	),
 	// non-cacheable actions
 	array(
-		'News' => 'new, create',
+		'News' => 'create',
+	)
+);
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'T3ext.' . $_EXTKEY,
+	'NewsFeEdit',
+	array(
+		'News' => 'list, new, create, thankyou, edit, update',
+	),
+	// non-cacheable actions
+	array(
+		'News' => 'create, edit, update',
 	)
 );
 
