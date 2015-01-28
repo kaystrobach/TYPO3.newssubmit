@@ -58,7 +58,7 @@ class ObjectStorageConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\O
 					if ($propertyValue['error'] !== \UPLOAD_ERR_NO_FILE || isset($propertyValue['submittedFile']['resourcePointer'])) {
 						$propertiesToConvert[$propertyName] = $propertyValue;
 					}
-				} else {
+				} elseif ($propertyValue) {
 					$propertiesToConvert[$propertyName] = $propertyValue;
 				}
 			}

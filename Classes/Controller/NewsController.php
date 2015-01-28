@@ -92,54 +92,28 @@ class NewsController extends ActionController {
 	protected function setTypeConverterConfigurationForFileUpload($argumentName) {
 		$mediaUploadConfiguration = array(
 			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => $this->settings['imageFolder'],
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => $this->settings['imagesFolder'],
 		);
 		$relatedFileUploadConfiguration = array(
 			UploadedFileReferenceConverter::CONFIGURATION_ALLOWED_FILE_EXTENSIONS => NULL,
-			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => $this->settings['imageFolder'],
+			UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER => $this->settings['attachmentsFolder'],
 		);
 		/** @var PropertyMappingConfiguration $newsConfiguration */
 		$newsConfiguration = $this->arguments[$argumentName]->getPropertyMappingConfiguration();
-		$newsConfiguration->forProperty('falMedia.0')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$mediaUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falMedia.1')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$mediaUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falMedia.2')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$mediaUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falMedia.3')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$mediaUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falRelatedFiles.0')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$relatedFileUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falRelatedFiles.1')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$relatedFileUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falRelatedFiles.2')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$relatedFileUploadConfiguration
-			);
-		$newsConfiguration->forProperty('falRelatedFiles.3')
-			->setTypeConverterOptions(
-				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
-				$relatedFileUploadConfiguration
-			);
+		for ($i = 0; $i < (int)$this->settings['image']['count']; $i++) {
+			$newsConfiguration->forProperty('falMedia.' . $i)
+				->setTypeConverterOptions(
+					'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+					$mediaUploadConfiguration
+				);
+		}
+		for ($i = 0; $i < (int)$this->settings['attachment']['count']; $i++) {
+			$newsConfiguration->forProperty('falRelatedFiles.' . $i)
+				->setTypeConverterOptions(
+					'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+					$relatedFileUploadConfiguration
+				);
+		}
 	}
 
 	/**
@@ -177,14 +151,6 @@ class NewsController extends ActionController {
 
 		if (empty($this->settings['enableNewItemsByDefault'])) {
 			$newNews->setHidden(1);
-		}
-
-		// cleanup empty category
-		// todo: find cleaner way for this
-		foreach ($newNews->getCategories() as $category) {
-			if ($category === NULL) {
-				$newNews->getCategories()->detach($category);
-			}
 		}
 
 		if($link !== '') {
