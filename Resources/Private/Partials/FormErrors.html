@@ -1,28 +1,3 @@
-<f:form.errors>
-	<div class="error">
-		<f:translate key="formerror"/>
-
-		<f:if condition="{error.propertyName}">
-			<p>
-				<f:for each="{error.errors}" as="errorDetail">
-					<b title="{errorDetail.propertyName}">
-						<f:translate key="formerror.field" />: <f:translate key="tx_newssubmit_domain_model_news.{errorDetail.propertyName}" />
-					</b>
-
-					<f:for each="{errorDetail.errors}" as="errorDetailsOfField">
-						<span title="{errorDetailsOfField.code}">
-							<f:translate key="{errorDetailsOfField.code}"/>
-						</span>
-					</f:for>
-					<br/>
-				</f:for>
-			</p>
-		</f:if>
-	</div>
-</f:form.errors>
-
-<f:comment>
-	Enable this for 6.2 support
 
 <f:form.validationResults>
 	<f:if condition="{validationResults.flattenedErrors}">
@@ -46,5 +21,3 @@
 		</div>
 	</f:if>
 </f:form.validationResults>
-
-</f:comment>
