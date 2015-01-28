@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\Property\TypeConverter;
+namespace T3ext\Newssubmit\Property\TypeConverter;
 
 /***************************************************************
  *  Copyright notice
@@ -179,7 +179,7 @@ class UploadedFileReferenceConverter extends \TYPO3\CMS\Extbase\Property\TypeCon
 		}
 
 		$allowedFileExtensions = $configuration->getConfigurationValue(
-			'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+			'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 			self::CONFIGURATION_ALLOWED_FILE_EXTENSIONS
 		);
 
@@ -190,8 +190,8 @@ class UploadedFileReferenceConverter extends \TYPO3\CMS\Extbase\Property\TypeCon
 			}
 		}
 
-		$uploadFolderId = $configuration->getConfigurationValue('MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter', self::CONFIGURATION_UPLOAD_FOLDER) ?: $this->defaultUploadFolder;
-		$conflictMode = $configuration->getConfigurationValue('MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter', self::CONFIGURATION_UPLOAD_CONFLICT_MODE) ?: $this->defaultConflictMode;
+		$uploadFolderId = $configuration->getConfigurationValue('T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter', self::CONFIGURATION_UPLOAD_FOLDER) ?: $this->defaultUploadFolder;
+		$conflictMode = $configuration->getConfigurationValue('T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter', self::CONFIGURATION_UPLOAD_CONFLICT_MODE) ?: $this->defaultConflictMode;
 
 		$uploadFolder = $this->resourceFactory->retrieveFileOrFolderObject($uploadFolderId);
 		$uploadedFile = $uploadFolder->addUploadedFile($uploadInfo, $conflictMode);

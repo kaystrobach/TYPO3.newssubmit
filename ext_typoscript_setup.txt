@@ -1,7 +1,7 @@
 config.tx_extbase{
     persistence{
         classes{
-            MiniFranske\Newssubmit\Domain\Model\News {
+            T3ext\Newssubmit\Domain\Model\News {
                 mapping {
                     tableName = tx_news_domain_model_news
                     recordType = 0

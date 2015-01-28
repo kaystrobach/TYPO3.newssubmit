@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\Domain\Model;
+namespace T3ext\Newssubmit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice

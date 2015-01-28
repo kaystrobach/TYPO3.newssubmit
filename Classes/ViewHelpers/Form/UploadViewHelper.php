@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\ViewHelpers\Form;
+namespace T3ext\Newssubmit\ViewHelpers\Form;
 
 /***************************************************************
  *  Copyright notice

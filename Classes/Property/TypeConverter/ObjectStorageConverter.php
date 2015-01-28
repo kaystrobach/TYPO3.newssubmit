@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\Property\TypeConverter;
+namespace T3ext\Newssubmit\Property\TypeConverter;
 
 /***************************************************************
  *  Copyright notice

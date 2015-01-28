@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\Tests\Domain\Model;
+namespace T3ext\Newssubmit\Tests\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -25,7 +25,7 @@ namespace MiniFranske\Newssubmit\Tests\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use MiniFranske\Newssubmit\Domain\Model\News;
+use T3ext\Newssubmit\Domain\Model\News;
 
 /**
  * Test case for class News.

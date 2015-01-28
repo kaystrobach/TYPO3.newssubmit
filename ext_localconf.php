@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'MiniFranske.' . $_EXTKEY,
+	'T3ext.' . $_EXTKEY,
 	'Newssubmit',
 	array(
 		'News' => 'new, create, thankyou',
@@ -17,8 +17,8 @@ if (!defined('TYPO3_MODE')) {
 
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter(
-	'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter'
+	'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter'
 );
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerTypeConverter(
-	'MiniFranske\\Newssubmit\\Property\\TypeConverter\\ObjectStorageConverter'
+	'T3ext\\Newssubmit\\Property\\TypeConverter\\ObjectStorageConverter'
 );

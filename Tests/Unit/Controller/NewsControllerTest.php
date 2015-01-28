@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\Tests\Controller;
+namespace T3ext\Newssubmit\Tests\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -25,7 +25,7 @@ namespace MiniFranske\Newssubmit\Tests\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use MiniFranske\Newssubmit\Domain\Model\News;
+use T3ext\Newssubmit\Domain\Model\News;
 use TYPO3\CMS\Core\Tests\Unit\Resource\BaseTestCase;
 
 /**

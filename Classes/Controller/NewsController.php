@@ -1,5 +1,5 @@
 <?php
-namespace MiniFranske\Newssubmit\Controller;
+namespace T3ext\Newssubmit\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -25,9 +25,9 @@ namespace MiniFranske\Newssubmit\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use MiniFranske\Newssubmit\Domain\Model\News;
-use MiniFranske\Newssubmit\Domain\Repository\NewsRepository;
-use MiniFranske\Newssubmit\Property\TypeConverter\UploadedFileReferenceConverter;
+use T3ext\Newssubmit\Domain\Model\News;
+use T3ext\Newssubmit\Domain\Repository\NewsRepository;
+use T3ext\Newssubmit\Property\TypeConverter\UploadedFileReferenceConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
@@ -47,7 +47,7 @@ class NewsController extends ActionController {
 	/**
 	 * newsRepository
 	 *
-	 * @var \MiniFranske\Newssubmit\Domain\Repository\NewsRepository
+	 * @var \T3ext\Newssubmit\Domain\Repository\NewsRepository
 	 */
 	protected $newsRepository;
 
@@ -102,42 +102,42 @@ class NewsController extends ActionController {
 		$newsConfiguration = $this->arguments[$argumentName]->getPropertyMappingConfiguration();
 		$newsConfiguration->forProperty('falMedia.0')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$mediaUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falMedia.1')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$mediaUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falMedia.2')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$mediaUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falMedia.3')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$mediaUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falRelatedFiles.0')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$relatedFileUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falRelatedFiles.1')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$relatedFileUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falRelatedFiles.2')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$relatedFileUploadConfiguration
 			);
 		$newsConfiguration->forProperty('falRelatedFiles.3')
 			->setTypeConverterOptions(
-				'MiniFranske\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
+				'T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter',
 				$relatedFileUploadConfiguration
 			);
 	}
