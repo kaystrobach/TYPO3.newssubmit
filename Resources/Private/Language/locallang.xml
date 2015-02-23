@@ -121,5 +121,41 @@
 
 			<label index="news.created">Het bericht is toegevoegd</label>
 		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="tx_newssubmit_domain_model_news">Actualité</label>
+			<label index="formerror.field">Champ:</label>
+			<label index="formerror">Une erreur s'est produite lors de la sauvegarde des données du formulaire</label>
+			<label index="1245107351">Les données fournies ne sont pas valides.</label>
+			<label index="1221560718">Le champs "Sujet" doit être renseigné</label>
+			<label index="1221560910">La valeur est NULL.</label>
+			
+			<label index="header.message">Message</label>
+			<label index="header.metadata">Méta données</label>
+			<label index="header.references">Références</label>
+			
+			<label index="tx_newssubmit_domain_model_news.title">Titre</label>
+			<label index="tx_newssubmit_domain_model_news.bodytext">Texte</label>
+			<label index="tx_newssubmit_domain_model_news.author">Auteur</label>
+			<label index="tx_newssubmit_domain_model_news.authorEmail">E-Mail</label>
+			<label index="tx_newssubmit_domain_model_news.keywords">Mots-clés</label>
+			<label index="tx_newssubmit_domain_model_news.link">Lien</label>
+			<label index="tx_newssubmit_domain_model_news.category">Catégorie</label>
+			<label index="tx_newssubmit_domain_model_news.categories">Catégories</label>
+			<label index="tx_newssubmit_domain_model_news.image">Image</label>
+			<label index="tx_newssubmit_domain_model_news.attachment">Fichier joint</label>
+			
+			<label index="newNews.title">Titre</label>
+			<label index="newNews.bodytext">Texte</label>
+			<label index="newNews.author">Auteur</label>
+			<label index="newNews.authorEmail">E-Mail</label>
+			<label index="newNews.keywords">Mots-clés</label>
+			<label index="newNews.link">Lien</label>
+			<label index="newNews.categories">Catégories</label>
+			<label index="newNews.image">Image</label>
+			<label index="newNews.attachment">Fichier joint</label>
+			<label index="tx_newssubmit_domain_model_news.createNew">Créer la News</label>
+			<label index="tx_newssubmit_domain_model_news.save">Enregistrer les modifications</label>
+			<label index="news.created">Votre Actualité à été créée avec succès</label
+		</languageKey>
 	</data>
 </T3locallang>
