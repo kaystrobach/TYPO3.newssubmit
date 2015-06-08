@@ -238,6 +238,7 @@ class UploadedFileReferenceConverter extends \TYPO3\CMS\Extbase\Property\TypeCon
 
 		$fileReference->setOriginalResource($falFileReference);
 		$fileReference->setFileUid($falFileReference->getOriginalFile()->getUid());
+		$fileReference->setShowinpreview($falFileReference->getProperty('showinpreview'));
 
 		return $fileReference;
 	}
