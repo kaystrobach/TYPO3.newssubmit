@@ -155,7 +155,7 @@
 			<label index="newNews.attachment">Fichier joint</label>
 			<label index="tx_newssubmit_domain_model_news.createNew">Créer la News</label>
 			<label index="tx_newssubmit_domain_model_news.save">Enregistrer les modifications</label>
-			<label index="news.created">Votre Actualité à été créée avec succès</label
+			<label index="news.created">Votre Actualité à été créée avec succès</label>
 		</languageKey>
 	</data>
 </T3locallang>
