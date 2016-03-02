@@ -1,0 +1,29 @@
+{
+  "name": "t3ext/newssubmit",
+  "description": "Submit News and store them.",
+  "type": "typo3-cms-extension",
+  "version": "1.0.0",
+  "require": {
+    "typo3/cms-core": ">=6.2.4,<8.0"
+  },
+  "require-dev": {
+    "typo3/cms": "^7.6"
+  },
+  "replace": {
+    "newssubmit": "self.version",
+    "typo3-ter/newssubmit": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "T3ext\\Newssubmit\\": "Classes/"
+    }
+  },
+  "keywords": ["news", "TYPO3", "newssubmit"],
+  "homepage": "https://github.com/kaystrobach/TYPO3.newssubmit/",
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web"
+    }
+  }
+}

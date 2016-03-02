@@ -14,13 +14,13 @@ $EM_CONF[$_EXTKEY] = array(
 	'shy' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'beta',
+	'state' => 'stable',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '0.1.0',
+	'version' => '1.0.0',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '6.2.4-7.99.99',
+			'typo3' => '6.2.4-7.6.99',
 			'news' => '3.*'
 		),
 		'conflicts' => array(
