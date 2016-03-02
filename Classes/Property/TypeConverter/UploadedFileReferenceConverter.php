@@ -25,6 +25,7 @@ namespace T3ext\Newssubmit\Property\TypeConverter;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use GeorgRinger\News\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
 use TYPO3\CMS\Core\Resource\File as FalFile;
 use TYPO3\CMS\Core\Resource\FileReference as FalFileReference;
@@ -208,7 +209,7 @@ class UploadedFileReferenceConverter extends \TYPO3\CMS\Extbase\Property\TypeCon
 	/**
 	 * @param FalFile $file
 	 * @param int $resourcePointer
-	 * @return \Tx_News_Domain_Model_FileReference
+	 * @return FileReference
 	 */
 	protected function createFileRefrenceFromFalFileObject(FalFile $file, $resourcePointer = NULL) {
 		$fileReference = $this->resourceFactory->createFileReferenceObject(
@@ -225,15 +226,15 @@ class UploadedFileReferenceConverter extends \TYPO3\CMS\Extbase\Property\TypeCon
 	/**
 	 * @param FalFileReference $falFileReference
 	 * @param int $resourcePointer
-	 * @return \Tx_News_Domain_Model_FileReference
+	 * @return FileReference
 	 */
 	protected function createFileReferenceFromFalFileReferenceObject(FalFileReference $falFileReference, $resourcePointer = NULL) {
 		if ($resourcePointer === NULL) {
-			/** @var $fileReference \Tx_News_Domain_Model_FileReference */
-			$fileReference = $this->objectManager->get('Tx_News_Domain_Model_FileReference');
+			/** @var $fileReference FileReference */
+			$fileReference = $this->objectManager->get('GeorgRinger\\News\\Domain\\Model\\FileReference');
 
 		} else {
-			$fileReference = $this->persistenceManager->getObjectByIdentifier($resourcePointer, 'Tx_News_Domain_Model_FileReference', FALSE);
+			$fileReference = $this->persistenceManager->getObjectByIdentifier($resourcePointer, 'GeorgRinger\\News\\Domain\\Model\\FileReference', FALSE);
 		}
 
 		$fileReference->setOriginalResource($falFileReference);

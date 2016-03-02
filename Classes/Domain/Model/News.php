@@ -30,7 +30,7 @@ namespace T3ext\Newssubmit\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class News extends \Tx_News_Domain_Model_News {
+class News extends \GeorgRinger\News\Domain\Model\News {
 
 	/**
 	 * @var string

@@ -25,6 +25,8 @@ namespace T3ext\Newssubmit\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use GeorgRinger\News\Domain\Model\Link;
+use GeorgRinger\News\Domain\Repository\CategoryRepository;
 use T3ext\Newssubmit\Domain\Model\News;
 use T3ext\Newssubmit\Domain\Repository\NewsRepository;
 use T3ext\Newssubmit\Property\TypeConverter\UploadedFileReferenceConverter;
@@ -52,7 +54,7 @@ class NewsController extends ActionController {
 	protected $newsRepository;
 
 	/**
-	 * @var \Tx_News_Domain_Repository_CategoryRepository
+	 * @var \GeorgRinger\News\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
@@ -154,7 +156,7 @@ class NewsController extends ActionController {
 		}
 
 		if($link !== '') {
-			$linkObject = new \Tx_News_Domain_Model_Link();
+			$linkObject = new Link();
 			$linkObject->setUri($link);
 			$linkObject->setTitle($link);
 			$newNews->addRelatedLink($linkObject);
@@ -186,7 +188,7 @@ class NewsController extends ActionController {
 	}
 
 	/**
-	 * Flush cache (like in Tx_News_Hooks_Tcemain::clearCachePostProc())
+	 * Flush cache (like in GeorgRinger\News\Hooks\DataHandler::clearCachePostProc())
 	 *
 	 * @param News $news
 	 */
@@ -220,10 +222,10 @@ class NewsController extends ActionController {
 	/**
 	 * injectCategoriesRepository
 	 *
-	 * @param \Tx_News_Domain_Repository_CategoryRepository $categoryRepository
+	 * @param \GeorgRinger\News\Domain\Repository\CategoryRepository $categoryRepository
 	 * @return void
 	 */
-	public function injectCategoryRepository(\Tx_News_Domain_Repository_CategoryRepository $categoryRepository) {
+	public function injectCategoryRepository(CategoryRepository $categoryRepository) {
 		$this->categoryRepository = $categoryRepository;
 	}
 

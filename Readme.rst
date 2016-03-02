@@ -16,5 +16,6 @@ Including the possibility to upload images and attachments.
 4. Happily submit your news from FE
 
 **Requirements:**
-    TYPO3 6.2.4
-    NEWS 3.*
+
+    TYPO3 >= 6.2.4
+    EXT:news >= 3.2
