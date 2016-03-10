@@ -41,7 +41,8 @@
 			<label for="news_category">
 				<f:translate key="tx_newssubmit_domain_model_news.category" />
 			</label>
-			<f:form.select property="categories" multiple="" size="1" id="news_category" prependOptionValue="" prependOptionLabel="" options="{categories}" optionLabelField="title" />
+			<ns:form.select property="categories" multiple="true" size="1" id="news_category" prependOptionValue=""
+							class="input-xlarge" prependOptionLabel="" options="{categories}" optionLabelField="title"/>
 		</f:then>
 		<f:else>
 			<f:if condition="{settings.categories.enabled}">
