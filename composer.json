@@ -2,9 +2,9 @@
   "name": "t3ext/newssubmit",
   "description": "Submit News and store them.",
   "type": "typo3-cms-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "require": {
-    "typo3/cms-core": ">=6.2.4,<8.0"
+    "typo3/cms-core": ">=6.2.4,<9.0"
   },
   "require-dev": {
     "typo3/cms": "^7.6"

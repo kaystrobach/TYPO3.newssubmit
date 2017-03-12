@@ -33,6 +33,11 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class LoopViewHelper extends AbstractViewHelper {
 
 	/**
+	 * @var bool
+	 */
+	protected $escapeOutput = false;
+
+	/**
 	 * Render a part x times
 	 *
 	 * @param int $count

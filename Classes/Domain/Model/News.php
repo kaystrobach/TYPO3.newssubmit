@@ -25,6 +25,8 @@ namespace T3ext\Newssubmit\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use GeorgRinger\News\Domain\Model\FileReference;
+
 /**
  * @package newssubmit
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -56,4 +58,20 @@ class News extends \GeorgRinger\News\Domain\Model\News {
 	 * @validate EmailAddress
 	 */
 	protected $authorEmail;
+
+	/**
+	 * Add a Fal media file reference
+	 *
+	 * @param FileReference $falMedia
+	 */
+	public function addFalMedia(FileReference $falMedia)
+	{
+		if (!$falMedia) {
+			return;
+		}
+		if ($this->getFalMedia() === null) {
+			$this->falMedia = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		}
+		$this->falMedia->attach($falMedia);
+	}
 }

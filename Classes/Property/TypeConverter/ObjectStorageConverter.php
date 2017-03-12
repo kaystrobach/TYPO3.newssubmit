@@ -37,7 +37,7 @@ class ObjectStorageConverter extends \TYPO3\CMS\Extbase\Property\TypeConverter\O
 	 *
 	 * @var integer
 	 */
-	protected $priority = 2;
+	protected $priority = 11;
 
 	/**
 	 * Returns the source, if it is an array, otherwise an empty array.
