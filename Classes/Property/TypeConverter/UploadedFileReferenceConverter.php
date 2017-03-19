@@ -191,7 +191,7 @@ class UploadedFileReferenceConverter extends \TYPO3\CMS\Extbase\Property\TypeCon
 			// @deprecated since 7.6 will be removed once 6.2 support is removed
 			$defaultConflictMode = 'changeName';
 		}
-		$conflictMode = $configuration->getConfigurationValue('Helhum\\UploadExample\\Property\\TypeConverter\\UploadedFileReferenceConverter', self::CONFIGURATION_UPLOAD_CONFLICT_MODE) ?: $defaultConflictMode;
+		$conflictMode = $configuration->getConfigurationValue('T3ext\\Newssubmit\\Property\\TypeConverter\\UploadedFileReferenceConverter', self::CONFIGURATION_UPLOAD_CONFLICT_MODE) ?: $defaultConflictMode;
 
 		$uploadFolder = $this->resourceFactory->retrieveFileOrFolderObject($uploadFolderId);
 		$uploadedFile = $uploadFolder->addUploadedFile($uploadInfo, $conflictMode);
